@@ -36,7 +36,7 @@ const enPlural = (n: number, one: string, many: string) => (n === 1 ? one : many
 
 const ru = {
   langName: "Русский",
-  nav: { aria: "Основное меню", cars: "Автомобили", reviews: "Отзывы", sights: "Куда поехать", about: "Почему мы", contacts: "Контакты", home: "на главную", menu: "Меню" },
+  nav: { aria: "Основное меню", cars: "Автомобили", reviews: "Отзывы", sights: "Куда поехать", about: "Почему мы", home: "на главную", menu: "Меню" },
   langSwitch: "Language: English",
   theme: { aria: "Переключить светлую/тёмную тему", title: "Светлая / тёмная тема" },
   stars: (v: number) => `Оценка ${v} из 5`,
@@ -179,7 +179,7 @@ export type Dict = typeof ru;
 
 const en: Dict = {
   langName: "English",
-  nav: { aria: "Main menu", cars: "Cars", reviews: "Reviews", sights: "Where to go", about: "Why us", contacts: "Contacts", home: "home page", menu: "Menu" },
+  nav: { aria: "Main menu", cars: "Cars", reviews: "Reviews", sights: "Where to go", about: "Why us", home: "home page", menu: "Menu" },
   langSwitch: "Язык: русский",
   theme: { aria: "Toggle light/dark theme", title: "Light / dark theme" },
   stars: (v) => `Rated ${v} out of 5`,

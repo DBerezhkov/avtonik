@@ -12,7 +12,7 @@ export function ThemeToggle({ className, lang = "ru" }: { className?: string; la
   }
   return (
     <button type="button" onClick={toggle} aria-label={t(lang).theme.aria} title={t(lang).theme.title}
-      className={`grid size-10 place-items-center rounded-full ring-1 ring-slate-200 hover:ring-brand ${className ?? ""}`}>
+      className={`grid size-10 shrink-0 place-items-center rounded-full ring-1 ring-slate-200 hover:ring-brand ${className ?? ""}`}>
       {/* луна — в светлой теме, солнце — в тёмной */}
       <svg viewBox="0 0 24 24" className="size-5 dark:hidden" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />

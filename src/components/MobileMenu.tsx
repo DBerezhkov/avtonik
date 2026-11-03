@@ -23,7 +23,7 @@ export function MobileMenu({ label, links, phone, chats }: { label: string; link
   const { open, setOpen, ref } = usePopover<HTMLDivElement>();
   const item = "block rounded-xl px-4 py-3 font-semibold hover:bg-slate-100 dark:hover:bg-white/10";
   return (
-    <div ref={ref} className="relative md:hidden">
+    <div ref={ref} className="relative shrink-0 xl:hidden">
       <button type="button" onClick={() => setOpen(!open)} aria-label={label} aria-expanded={open} aria-controls="mobile-menu"
         className="grid size-10 place-items-center rounded-full ring-1 ring-slate-200 hover:ring-brand">
         <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">

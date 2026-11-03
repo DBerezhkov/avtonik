@@ -17,7 +17,7 @@ export function LangSwitch({ lang }: { lang: Lang }) {
       e.preventDefault();
       router.push(href + location.search + location.hash);
     }} hrefLang={other} lang={other} aria-label={t(lang).langSwitch}
-      className="grid h-10 min-w-10 place-items-center rounded-full px-3 text-sm font-bold ring-1 ring-slate-200 hover:ring-brand">
+      className="grid h-10 min-w-10 shrink-0 place-items-center rounded-full px-3 text-sm font-bold ring-1 ring-slate-200 hover:ring-brand">
       {other.toUpperCase()}
     </Link>
   );

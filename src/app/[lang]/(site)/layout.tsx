@@ -20,8 +20,9 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[la
   ].filter((c): c is { key: "whatsapp" | "telegram"; href: string; label: string } => !!c);
   // Пункты меню — общие для шапки (с md) и бургера на телефоне
   const nav = [
-    { href: to("/cars"), label: d.nav.cars }, { href: to("/#reviews"), label: d.nav.reviews }, { href: to("/sights"), label: d.nav.sights },
-    { href: to("/#about"), label: d.nav.about }, { href: to("/#contacts"), label: d.nav.contacts },
+    // В том же порядке, что блоки на главной; «Контакты» не нужны — они в шапке и подвале
+    { href: to("/cars"), label: d.nav.cars }, { href: to("/sights"), label: d.nav.sights },
+    { href: to("/#reviews"), label: d.nav.reviews }, { href: to("/#about"), label: d.nav.about },
   ];
   return (
     <>
@@ -36,10 +37,11 @@ export default async function SiteLayout({ children, params }: LayoutProps<"/[la
             )}
             <span className="text-xl font-extrabold tracking-tight">{s.site_name}</span>
           </Link>
-          <nav aria-label={d.nav.aria} className="hidden gap-6 text-sm font-semibold text-slate-700 md:flex">
+          {/* Меню в строку — с xl: на планшете и узком ноутбуке вместе с кнопками шапки оно не помещалось, и кнопки сжимались друг на друга */}
+          <nav aria-label={d.nav.aria} className="hidden gap-6 whitespace-nowrap text-sm font-semibold text-slate-700 xl:flex">
             {nav.map((l) => <Link key={l.href} href={l.href} className="hover:text-brand">{l.label}</Link>)}
           </nav>
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <LangSwitch lang={lang} />
             <ThemeToggle lang={lang} />
             {chats.map((c) => (
