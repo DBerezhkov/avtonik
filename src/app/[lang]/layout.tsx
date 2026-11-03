@@ -4,7 +4,6 @@ import { brandColor, getSettings, localizeSettings } from "@/lib/data";
 import { SITE_URL } from "@/lib/format";
 import { LOCALES, OG_LOCALE, isLang } from "@/lib/i18n";
 import { THEME_SCRIPT, manrope } from "@/lib/fonts";
-import { ThemeSync } from "@/components/ThemeSync";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -42,10 +41,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
         {brand && <style>{`:root{--brand:${brand};--brand-dark:color-mix(in oklab,${brand} 82%,black)}`}</style>}
       </head>
-      <body className="min-h-full flex flex-col font-sans">
-        <ThemeSync />
-        {children}
-      </body>
+      <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );
 }
