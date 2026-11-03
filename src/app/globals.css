@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+/* Тёмная тема по классу .dark на <html> (ставит ThemeToggle и скрипт в layout). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --font-sans: var(--font-manrope);
+  /* Цвет темы — из настроек сайта (--brand ставит корневой layout), здесь только значения по умолчанию */
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-ink: #0f172a;
+  /* Семантические цвета: фон карточек и основной текст — меняются в тёмной теме */
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  /* Песочная палитра админки (как в старой админке autonik.rentals) */
+  --color-sand: #f5efe6;
+  --color-sand-field: #faf6ef;
+  --color-sand-line: #e8dfd1;
+  --color-sand-ink: #7d7364;
+}
+
+:root {
+  --brand: #ea580c;
+  --brand-dark: #c2410c;
+  --page: #fafaf9;
+  --surface: #ffffff;
+  --fg: #0f172a;
+}
+
+/* В тёмной теме серая шкала slate разворачивается: светлые фоны/рамки становятся тёмными,
+   тёмный текст — светлым. Разметка остаётся одной для обеих тем. */
+.dark {
+  color-scheme: dark;
+  --page: oklch(12.9% 0.042 264.695);
+  --surface: oklch(20.8% 0.042 265.755);
+  --fg: oklch(96.8% 0.007 247.896);
+  --color-slate-50: oklch(12.9% 0.042 264.695);
+  --color-slate-100: oklch(20.8% 0.042 265.755);
+  --color-slate-200: oklch(27.9% 0.041 260.031);
+  --color-slate-300: oklch(37.2% 0.044 257.287);
+  --color-slate-400: oklch(55.4% 0.046 257.417);
+  --color-slate-500: oklch(70.4% 0.04 256.788);
+  --color-slate-600: oklch(80% 0.03 254);
+  --color-slate-700: oklch(86.9% 0.022 252.894);
+  --color-slate-800: oklch(92.9% 0.013 255.508);
+  --color-slate-900: oklch(96.8% 0.007 247.896);
+}
+
+/* Блоки, которые тёмные в обеих темах (подвал): возвращаем исходную шкалу */
+.dark .scheme-fixed {
+  --color-slate-300: oklch(86.9% 0.022 252.894);
+  --color-slate-500: oklch(55.4% 0.046 257.417);
+}
+
+body {
+  background: var(--page);
+  color: var(--fg);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Календарь выбора дат (react-day-picker) в цветах сайта; тёмная тема — через --surface/--fg */
+.rdp-brand .rdp-root {
+  --rdp-accent-color: var(--brand);
+  --rdp-accent-background-color: color-mix(in oklab, var(--brand) 14%, transparent);
+  --rdp-day-height: 42px;
+  --rdp-day-width: 42px;
+  --rdp-day_button-height: 40px;
+  --rdp-day_button-width: 40px;
+  --rdp-months-gap: 2.5rem;
+  --rdp-today-color: var(--brand);
+  --rdp-selected-border: 2px solid transparent;
+  --rdp-disabled-opacity: 0.3;
+}
+.rdp-brand .rdp-month_caption { font-weight: 800; text-transform: capitalize; }
+.rdp-brand .rdp-weekday { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--color-slate-500); opacity: 1; }
+.rdp-brand .rdp-chevron { fill: var(--brand); }
+.rdp-brand .rdp-day_button { font-weight: 600; transition: background-color 0.15s; }
+.rdp-brand .rdp-day:not(.rdp-disabled):not(.rdp-selected) .rdp-day_button:hover { background: var(--rdp-accent-background-color); }
+.rdp-brand .rdp-today:not(.rdp-selected) .rdp-day_button { font-weight: 800; box-shadow: inset 0 0 0 1px var(--brand); }
+.rdp-brand .rdp-range_start .rdp-day_button,
+.rdp-brand .rdp-range_end .rdp-day_button { background: var(--brand); color: #fff; }
+.rdp-brand .rdp-range_middle .rdp-day_button { color: var(--fg); }
+/* Занятые машиной дни — перечёркнуты горизонтальной линией */
+.rdp-brand .rdp-taken .rdp-day_button { position: relative; }
+.rdp-brand .rdp-taken .rdp-day_button::after {
+  content: ""; position: absolute; left: 15%; right: 15%; top: 50%; height: 2px; border-radius: 1px; background: currentColor;
+}
+@media (max-width: 380px) {
+  .rdp-brand .rdp-root { --rdp-day-width: 38px; --rdp-day_button-width: 36px; }
+}

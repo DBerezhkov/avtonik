@@ -1,0 +1,196 @@
+{
+  "_about": "Английские версии контента БД. Применяются scripts/apply-translations.mjs только в пустые *_en поля.",
+  "settings": {
+    "city": "Batumi",
+    "hero_title": "Car Rental in Batumi",
+    "hero_subtitle": "Economy, SUV and premium cars with no hidden fees. Delivery to the airport and anywhere in Georgia, 24/7 support.",
+    "address": "32 Grigol Lordkipanidze St, Batumi",
+    "delivery_info": "Batumi International Airport (BUS) — free\nAvtoNik office (32 Grigol Lordkipanidze St) — free\nKutaisi International Airport (KUT) — $16\nTbilisi International Airport (TBS) — $20"
+  },
+  "car_descriptions": {
+    "Расход топлива (по стандартам EPA)\nГород: ~10.7–11.2 л / 100 км\nТрасса: ~7.8–8.1 л / 100 км\nСмешанный: ~9.4–9.8 л / 100 км\n(Реальный расход в городском цикле часто составляет 11.5–13 л / 100 км в зависимости от стиля езды и типа привода": "Fuel consumption (EPA ratings)\nCity: ~10.7–11.2 L/100 km\nHighway: ~7.8–8.1 L/100 km\nCombined: ~9.4–9.8 L/100 km\n(Real-world city consumption is often 11.5–13 L/100 km, depending on driving style and drivetrain.)",
+    "Полный привод (AWD), АКПП:\nГород: 11.2 – 12.5 л\nТрасса: 6.7 – 7.4 л\nСмешанный: 8.3 – 8.8 л": "All-wheel drive (AWD), automatic transmission:\nCity: 11.2–12.5 L\nHighway: 6.7–7.4 L\nCombined: 8.3–8.8 L",
+    "SE: 1.5L EcoBoost, электропривод сиденья водителя, противотуманные фары, мультимедиа SYNC 3 (8-дюймовый тачскрин с Apple CarPlay / Android Auto).Полный привод (AWD):\nГород: 10.7 л\nТрасса: 8.4 л\nСмешанный: 9.8 л": "SE trim: 1.5L EcoBoost, power driver's seat, fog lights, SYNC 3 infotainment (8-inch touchscreen with Apple CarPlay / Android Auto). All-wheel drive (AWD):\nCity: 10.7 L\nHighway: 8.4 L\nCombined: 9.8 L",
+    "Двигатель 1.4L Turbo (Бензин, 153 л.с. — LE2)Автомат (6-ст. АКПП - Hydra-Matic 6T35):\nГород: 8.1 – 8.4 л\nТрасса: 5.9 – 6.2 л\nСмешанный: 7.1 – 7.4 л Поддержка Apple CarPlay и Android Auto в базовом оснащении": "1.4L Turbo engine (petrol, 153 hp — LE2), 6-speed automatic (Hydra-Matic 6T35):\nCity: 8.1–8.4 L\nHighway: 5.9–6.2 L\nCombined: 7.1–7.4 L\nApple CarPlay and Android Auto as standard.",
+    "рестайлинге 2019 года обновлена передняя оптика (LED-фары в старших версиях), улучшена шумоизоляция, установлен мультимедийный комплекс Toyota Touch 2 с 7-дюймовым экраном и цветной 4.2-дюймовый дисплей на щитке приборов.Город: 7.8 – 8.3 л\nТрасса: 5.3 – 5.9 л\nСмешанный: 6.4 – 7.1 л Объем топливного бака 55 литров.": "The 2019 facelift brought updated headlights (LED on higher trims), better sound insulation, the Toyota Touch 2 infotainment system with a 7-inch screen and a 4.2-inch color display in the instrument cluster.\nCity: 7.8–8.3 L\nHighway: 5.3–5.9 L\nCombined: 6.4–7.1 L\nFuel tank: 55 liters.",
+    "56 литров (включая резерв порядка 6 литров)Полный привод (GLA 250 4MATIC)\nГород: 10.2 – 10.7 л\nТрасса: 7.1 – 7.6 л\nСмешанный: 8.7 – 9.0 л": "Fuel tank: 56 liters (including about 6 liters of reserve). All-wheel drive (GLA 250 4MATIC):\nCity: 10.2–10.7 L\nHighway: 7.1–7.6 L\nCombined: 8.7–9.0 L",
+    "Объем топливного бака :46.9 литра (12.3 галлона). Расход топлива :Город: 7.4 – 7.6 л\nТрасса: 5.6 – 6.2 л\nСмешанный: 6.5 – 6.9 л": "Fuel tank: 46.9 liters (12.3 gallons). Fuel consumption:\nCity: 7.4–7.6 L\nHighway: 5.6–6.2 L\nCombined: 6.5–6.9 L",
+    "Полный привод (AWD): 59.0 литров (15.6 галлона). Расход топлива: \nГород: 9.4 л\nТрасса: 7.8 л\nСмешанный: 8.7 л": "All-wheel drive (AWD), fuel tank: 59.0 liters (15.6 gallons). Fuel consumption:\nCity: 9.4 L\nHighway: 7.8 L\nCombined: 8.7 L"
+  },
+  "sights": {
+    "Национальный парк Мачахела": {
+      "name": "Machakhela National Park",
+      "region": "Khelvachauri",
+      "route": "Mountain Adjara",
+      "description": "The Machakhela River gorge near the Turkish border: Colchic forests, old arched bridges, a visitor center and a museum. This is where the route through mountain Adjara begins."
+    },
+    "Пляж Кобулети": {
+      "name": "Kobuleti Beach",
+      "region": "Kobuleti",
+      "route": "Coast",
+      "description": "The long pebble beach of the Kobuleti resort, 30 km north of Batumi, with a pine-lined promenade along the sea. A great first trip in any car."
+    },
+    "Смотровая площадка над Батуми": {
+      "name": "Batumi viewpoint",
+      "region": "Gonio",
+      "route": "Batumi & surroundings",
+      "description": "A hilltop viewpoint by the Gonio Cross with a panorama of Batumi, the sea and the mouth of the Chorokhi River. Best at sunset."
+    },
+    "Крепость Анария": {
+      "name": "Anaria Fortress",
+      "region": "Batumi",
+      "route": "Batumi & surroundings",
+      "description": "Hilltop fortress ruins east of the city overlooking Batumi and the valley. A short trip that's easy to combine with other stops."
+    },
+    "Перевал Годердзи": {
+      "name": "Goderdzi Pass",
+      "region": "Khulo",
+      "route": "Mountains",
+      "description": "A high mountain pass on the Batumi–Akhaltsikhe road and the Goderdzi ski resort: alpine meadows and views of the Adjara ranges. You'll need an all-wheel-drive car."
+    },
+    "Крепость Петра": {
+      "name": "Petra Fortress",
+      "region": "Tsikhisdziri",
+      "route": "Coast",
+      "description": "Ruins of a 6th-century Byzantine fortress on a cape above the sea between Batumi and Kobuleti, with a beach and the coastal railway nearby."
+    },
+    "Водопад Махунцети": {
+      "name": "Makhuntseti Waterfall",
+      "region": "Keda",
+      "route": "Mountain Adjara",
+      "description": "One of the best-known waterfalls in Adjara, 30 km from Batumi. Queen Tamar's medieval arched bridge is a few minutes away."
+    },
+    "Каньон Мартвили": {
+      "name": "Martvili Canyon",
+      "region": "Samegrelo",
+      "route": "Samegrelo · canyons",
+      "description": "A turquoise river in a narrow canyon with waterfalls. Walking trails and boat rides make it one of the most popular trips in western Georgia."
+    },
+    "Батумский ботанический сад": {
+      "name": "Batumi Botanical Garden",
+      "region": "Mtsvane Kontskhi",
+      "route": "Coast",
+      "description": "One of the largest botanical gardens of the former USSR, founded in 1912 on the Green Cape: plants from all over the world and sea views."
+    },
+    "Пещера Прометея": {
+      "name": "Prometheus Cave",
+      "region": "Kumistavi",
+      "route": "Samegrelo · canyons",
+      "description": "A karst cave near Kutaisi with illuminated halls full of stalactites and stalagmites, plus an underground river boat ride in season."
+    },
+    "Крепость царицы Тамары": {
+      "name": "Queen Tamar Fortress",
+      "region": "Batumi",
+      "route": "Batumi & surroundings",
+      "description": "Ruins of a medieval hilltop fortress in northern Batumi with views of the city and the sea."
+    },
+    "Пляж Сарпи": {
+      "name": "Sarpi Beach",
+      "region": "Sarpi",
+      "route": "Coast",
+      "description": "A beach right at the Turkish border with clear water and rocks — great for swimming and snorkeling."
+    },
+    "Каньон Окаце: смотровая площадка": {
+      "name": "Okatse Canyon viewpoint",
+      "region": "Samegrelo",
+      "route": "Samegrelo · canyons",
+      "description": "A metal walkway suspended along a sheer cliff and a platform hanging over the canyon. Breathtaking."
+    },
+    "Анаклия": {
+      "name": "Anaklia",
+      "region": "Samegrelo",
+      "route": "Coast",
+      "description": "A resort village with a long sandy beach and a footbridge across the Enguri River — one of the longest in Georgia."
+    },
+    "Вардзиа": {
+      "name": "Vardzia",
+      "region": "Samtskhe-Javakheti",
+      "route": "Long trip",
+      "description": "A 12th-century cave monastery from Queen Tamar's era, carved into a cliff on several levels. A long but unforgettable trip."
+    },
+    "Визит-центр каньона Окаце": {
+      "name": "Okatse Canyon Visitor Center",
+      "region": "Samegrelo",
+      "route": "Samegrelo · canyons",
+      "description": "The start of the trail to Okatse Canyon, with a ticket office, parking and a café. Kinchkha Waterfall is nearby."
+    },
+    "Мост Дандало": {
+      "name": "Dandalo Bridge",
+      "region": "Dandalo",
+      "route": "Mountain Adjara",
+      "description": "A 12th-century stone arched bridge over the Adjaristsqali River — one of the most picturesque medieval bridges in Adjara."
+    },
+    "Площадка для споттинга": {
+      "name": "Plane-spotting point",
+      "region": "Batumi",
+      "route": "Batumi & surroundings",
+      "description": "A spot by Batumi Airport where planes come in to land right overhead. A favorite with photographers and kids."
+    },
+    "Водопад Кинчха": {
+      "name": "Kinchkha Waterfall",
+      "region": "Kinchkhaperdi",
+      "route": "Samegrelo · canyons",
+      "description": "A large multi-tiered waterfall in the mountains above Okatse, reached by a trail from the viewpoint."
+    },
+    "Дендрологический парк Шекветили": {
+      "name": "Shekvetili Dendrological Park",
+      "region": "Shekvetili",
+      "route": "Coast",
+      "description": "A large seaside park with a tree collection, walking alleys and ponds. Shekvetili Beach is right next to it."
+    },
+    "Эко-деревня Stone River": {
+      "name": "Stone River Eco Village",
+      "region": "Ajara",
+      "route": "Mountain Adjara",
+      "description": "A mountain getaway near Batumi: a Russian banya on the bank of a mountain river and the quiet of nature."
+    },
+    "Водопад Мирвети": {
+      "name": "Mirveti Waterfall",
+      "region": "Mirveti",
+      "route": "Mountain Adjara",
+      "description": "A waterfall in a green gorge 20 km from Batumi, next to an old stone arched bridge."
+    },
+    "Гомисмта": {
+      "name": "Gomismta",
+      "region": "Guria",
+      "route": "Mountains",
+      "description": "A mountain village at about 2,000 meters, famous for its \"sea of clouds\" at sunrise. The road is for all-wheel-drive cars only."
+    },
+    "Водопад Андрея Первозванного": {
+      "name": "St. Andrew the First-Called Waterfall",
+      "region": "Kvariati",
+      "route": "Coast",
+      "description": "A small seaside waterfall in Kvariati. According to tradition, the Apostle Andrew preached here."
+    },
+    "Paragraph Resort & Spa Шекветили": {
+      "name": "Paragraph Resort & Spa Shekvetili",
+      "region": "Shekvetili",
+      "route": "Coast",
+      "description": "A seaside resort from Marriott's Autograph Collection. Tip: at the checkpoint, say you're heading to the restaurant or spa."
+    },
+    "Национальный парк Мтирала": {
+      "name": "Mtirala National Park",
+      "region": "Chakvi",
+      "route": "Mountains",
+      "description": "Mtirala, the \"weeping mountain\", is one of the rainiest places in Georgia: relict Colchic forest, waterfalls and eco-trails not far from Batumi."
+    },
+    "Крепость Кавиани": {
+      "name": "Kaviani Fortress",
+      "region": "Khichauri",
+      "route": "Mountain Adjara",
+      "description": "Ruins of a medieval fortress above the Adjaristsqali gorge on the way into mountain Adjara, near Dandalo Bridge."
+    },
+    "Крепость Гонио": {
+      "name": "Gonio Fortress",
+      "region": "Gonio",
+      "route": "Coast",
+      "description": "The 1st-century Roman fortress of Apsaros, 12 km from Batumi. According to tradition, the Apostle Matthias is buried here."
+    },
+    "Подвесной мост": {
+      "name": "Suspension bridge",
+      "region": "Mirveti",
+      "route": "Mountain Adjara",
+      "description": "A pedestrian suspension bridge over a mountain river on the way to Mirveti Waterfall."
+    }
+  }
+}

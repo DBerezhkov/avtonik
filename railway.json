@@ -1,0 +1,14 @@
+{
+  "$schema": "https://railway.com/railway.schema.json",
+  "build": {
+    "builder": "RAILPACK",
+    "buildCommand": "echo 'next build — при старте: страницы собираются из базы, а том /data подключён только к запущенному контейнеру'"
+  },
+  "deploy": {
+    "startCommand": "npm run build && npm run start",
+    "healthcheckPath": "/",
+    "healthcheckTimeout": 600,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 3
+  }
+}

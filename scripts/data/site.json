@@ -1,0 +1,24 @@
+{
+ "_comment": "Настройки сайта для первичного импорта (данные с autonik.rentals и списка Google Maps). Дальше всё редактируется в админке.",
+ "settings": {
+  "site_name": "AvtoNik",
+  "city": "Батуми",
+  "hero_title": "Аренда автомобилей в Батуми",
+  "hero_subtitle": "Эконом, SUV и премиум-авто без скрытых платежей. Подача в аэропорт и по всей Грузии, связь 24/7.",
+  "phone": "+995 511 43 63 43",
+  "whatsapp": "995511436343",
+  "telegram": "@autonikrentals",
+  "email": "avtonikrental@gmail.com",
+  "address": "ул. Григола Лордкипанидзе, 32, Батуми",
+  "instagram": "https://www.instagram.com/autonikrentals",
+  "facebook": "https://www.facebook.com/profile.php?id=61581156422826",
+  "currency": "USD",
+  "google_review_url": "https://g.page/r/Cdtp3La8609MEBM/review"
+ },
+ "hero_photo": "Ajaria Mountains, Chinkadze Mountain Trail, Georgia - Flickr - Boris Kuznetsov.jpg",
+ "sources": {
+  "cars_api": "https://autonikapi.vercel.app/api/cars-data",
+  "pickup_api": "https://autonikapi.vercel.app/api/pickup-locations",
+  "google_list": "Uw6-1VaNICt7EE4J9YeeMGP1iKrGmQ"
+ }
+}

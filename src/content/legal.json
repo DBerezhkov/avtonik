@@ -1,0 +1,461 @@
+{
+ "source": "https://www.autonik.rentals (/privacy, /terms), выгружено 2026-11-01",
+ "privacy": {
+  "en": {
+   "title": "Privacy Policy",
+   "updated": "Last Updated: August 6, 2026",
+   "intro": "Welcome to AvtoNik. We value your privacy and are committed to protecting your personal information. This Privacy Policy explains what information we collect, why we collect it, and how we handle it.",
+   "sections": [
+    {
+     "heading": "1. Information We Collect",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "When you make a booking through our website, we collect the following information:"
+      },
+      {
+       "kind": "ul",
+       "items": [
+        "Full Name",
+        "Phone Number",
+        "Email Address"
+       ]
+      },
+      {
+       "kind": "p",
+       "text": "We do not collect payment information through our website unless explicitly stated."
+      }
+     ]
+    },
+    {
+     "heading": "2. Why We Collect Your Information",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "Your personal information is collected solely to:"
+      },
+      {
+       "kind": "ul",
+       "items": [
+        "Process and manage your vehicle booking",
+        "Contact you regarding your reservation if necessary",
+        "Track active bookings and provide customer support"
+       ]
+      },
+      {
+       "kind": "p",
+       "text": "Your information is never used for:"
+      },
+      {
+       "kind": "ul",
+       "items": [
+        "Marketing campaigns",
+        "Promotional emails",
+        "Selling or sharing customer data",
+        "Advertising purposes"
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "3. Data Retention",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "We retain your personal information for no longer than 30 days after it is submitted."
+      },
+      {
+       "kind": "p",
+       "text": "After this period, your information is permanently deleted from our systems unless we are legally required to retain it for a longer period."
+      }
+     ]
+    },
+    {
+     "heading": "4. How We Protect Your Data",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "We take reasonable technical and organizational measures to protect your information against unauthorized access, loss, misuse, or disclosure."
+      }
+     ]
+    },
+    {
+     "heading": "5. Data Sharing",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "We do not sell, rent, trade, or share your personal information with any third party, organization, or marketing company."
+      },
+      {
+       "kind": "p",
+       "text": "Your information remains solely within AvtoNik and is used only for booking management."
+      }
+     ]
+    },
+    {
+     "heading": "6. Cookies",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "Our website may use basic cookies necessary for the website to function properly. These cookies do not collect personal information for advertising or marketing purposes."
+      }
+     ]
+    },
+    {
+     "heading": "7. Your Rights",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "You have the right to:"
+      },
+      {
+       "kind": "ul",
+       "items": [
+        "Request access to the personal information we hold about you.",
+        "Request correction of inaccurate information.",
+        "Request deletion of your information before the 30-day retention period, unless it is required to complete an active booking or comply with legal obligations."
+       ]
+      },
+      {
+       "kind": "p",
+       "text": "To exercise these rights, please contact us using the information below."
+      }
+     ]
+    },
+    {
+     "heading": "8. Contact Us",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "If you have any questions regarding this Privacy Policy or how your data is handled, please contact us:"
+      },
+      {
+       "kind": "p",
+       "text": "AvtoNik"
+      },
+      {
+       "kind": "email",
+       "address": "avtonikrental@gmail.com"
+      }
+     ]
+    },
+    {
+     "heading": "9. Changes to This Privacy Policy",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date."
+      }
+     ]
+    }
+   ]
+  },
+  "ru": {
+   "title": "Политика конфиденциальности",
+   "updated": "Последнее обновление: 6 августа 2026 г.",
+   "intro": "Добро пожаловать в AvtoNik. Мы ценим вашу конфиденциальность и стремимся защищать ваши персональные данные. Настоящая Политика конфиденциальности объясняет, какую информацию мы собираем, зачем мы это делаем и как мы обрабатываем ваши данные.",
+   "sections": [
+    {
+     "heading": "1. Какие данные мы собираем",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "При оформлении бронирования на нашем сайте мы собираем следующую информацию:"
+      },
+      {
+       "kind": "ul",
+       "items": [
+        "Полное имя",
+        "Номер телефона",
+        "Адрес электронной почты"
+       ]
+      },
+      {
+       "kind": "p",
+       "text": "Мы не собираем платежную информацию через наш сайт, если не указано иное."
+      }
+     ]
+    },
+    {
+     "heading": "2. Для чего мы собираем ваши данные",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "Ваши персональные данные используются исключительно для следующих целей:"
+      },
+      {
+       "kind": "ul",
+       "items": [
+        "Обработка и управление бронированием автомобиля;",
+        "Связь с вами при необходимости по вопросам вашего бронирования;",
+        "Отслеживание активных бронирований и предоставление клиентской поддержки."
+       ]
+      },
+      {
+       "kind": "p",
+       "text": "Ваши данные никогда не используются для:"
+      },
+      {
+       "kind": "ul",
+       "items": [
+        "Маркетинговых кампаний;",
+        "Рассылки рекламных писем;",
+        "Продажи или передачи третьим лицам;",
+        "Рекламных или иных коммерческих целей."
+       ]
+      }
+     ]
+    },
+    {
+     "heading": "3. Срок хранения данных",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "Мы храним ваши персональные данные не более 30 дней с момента их предоставления."
+      },
+      {
+       "kind": "p",
+       "text": "По истечении этого срока ваши данные безвозвратно удаляются из наших систем, если иное не требуется в соответствии с действующим законодательством."
+      }
+     ]
+    },
+    {
+     "heading": "4. Защита данных",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "Мы принимаем разумные технические и организационные меры для защиты ваших персональных данных от несанкционированного доступа, утраты, неправомерного использования или раскрытия."
+      }
+     ]
+    },
+    {
+     "heading": "5. Передача данных третьим лицам",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "Мы не продаём, не сдаём в аренду, не обмениваем и не передаём ваши персональные данные каким-либо третьим лицам, организациям или маркетинговым компаниям."
+      },
+      {
+       "kind": "p",
+       "text": "Ваши данные используются исключительно внутри AvtoNik для управления бронированиями."
+      }
+     ]
+    },
+    {
+     "heading": "6. Файлы cookie",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "Наш сайт может использовать только необходимые файлы cookie, обеспечивающие корректную работу сайта. Эти файлы cookie не используются для рекламы, маркетинга или отслеживания пользователей."
+      }
+     ]
+    },
+    {
+     "heading": "7. Ваши права",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "Вы имеете право:"
+      },
+      {
+       "kind": "ul",
+       "items": [
+        "Запросить информацию о ваших персональных данных, которые мы храним;",
+        "Потребовать исправления неточных данных;",
+        "Потребовать удаления ваших данных до истечения 30-дневного срока хранения, если они больше не требуются для выполнения активного бронирования или соблюдения требований законодательства."
+       ]
+      },
+      {
+       "kind": "p",
+       "text": "Для реализации этих прав свяжитесь с нами, используя контактную информацию ниже."
+      }
+     ]
+    },
+    {
+     "heading": "8. Свяжитесь с нами",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "Если у вас возникли вопросы относительно настоящей Политики конфиденциальности или обработки ваших персональных данных, пожалуйста, свяжитесь с нами:"
+      },
+      {
+       "kind": "p",
+       "text": "AvtoNik"
+      },
+      {
+       "kind": "email",
+       "address": "avtonikrental@gmail.com"
+      }
+     ]
+    },
+    {
+     "heading": "9. Изменения в Политике конфиденциальности",
+     "blocks": [
+      {
+       "kind": "p",
+       "text": "Мы можем время от времени обновлять настоящую Политику конфиденциальности. Все изменения будут опубликованы на этой странице с указанием новой даты последнего обновления."
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "terms": {
+  "en": {
+   "title": "Terms and Conditions",
+   "sections": [
+    {
+     "heading": "1. Requirements for the Renter",
+     "lines": [
+      "Driver’s License: The renter must have held a valid driver’s license for at least 2 years. For citizens of non-EU countries, an International Driving Permit (IDP) is recommended.",
+      "Age Restrictions: The minimum age for renters is 21 years.",
+      "Identification: A valid passport or national ID must be presented when collecting the vehicle."
+     ]
+    },
+    {
+     "heading": "2. Payment and Deposit",
+     "lines": [
+      "Payment Methods: Major credit and debit cards, as well as cash, are accepted. Payment must be made in the renter’s name and must be valid for the entire rental period.",
+      "Deposit: A deposit is required when picking up the vehicle, with the amount depending on the selected car class. The deposit is refunded immediately after the vehicle is returned, provided all rental conditions are met."
+     ]
+    },
+    {
+     "heading": "3. Rental Period",
+     "lines": [
+      "Duration: The minimum rental period is 1 day. One rental day equals 24 hours from the start of the rental.",
+      "Grace Period: A 2-hour grace period is allowed. If the vehicle is returned more than 120 minutes late, an additional charge equal to the daily rental rate applies.",
+      "Late Return Fees:",
+      "- Up to 2 hours: Free (grace period)",
+      "- 2 to 6 hours: 50% of the daily rate",
+      "- More than 6 hours: Full daily rate for each additional day",
+      "Repeated late returns may result in administrative fees."
+     ]
+    },
+    {
+     "heading": "4. Vehicle Use",
+     "lines": [
+      "Authorized Drivers: Only persons listed in the rental agreement are allowed to drive the vehicle.",
+      "Prohibited Use: The vehicle may not be used:",
+      "- Off-road, if damage or loss is related to road conditions",
+      "- To transport passengers or goods for profit",
+      "- For subleasing",
+      "- While under the influence of alcohol or drugs"
+     ]
+    },
+    {
+     "heading": "5. Insurance and Liability",
+     "lines": [
+      "Coverage: All rates include Collision Damage Waiver (CDW) and Theft Protection (TP), reducing the renter’s liability to the deductible stated in the rental agreement. Insurance is valid only if the rental terms are followed and the incident is officially reported to the police.",
+      "Additional Coverage: The renter may purchase a “Full Protection” option, which reduces or eliminates financial liability in case of damage or theft, provided the rental conditions are observed."
+     ]
+    },
+    {
+     "heading": "6. Additional Services",
+     "lines": [
+      "Delivery and Collection: If you request delivery or return of the vehicle outside the company office, an additional fee applies.",
+      "Out-of-Hours Service: Vehicle pickup or return outside of standard business hours must be pre-arranged and is subject to an additional fee.",
+      "Fuel Policy: Vehicles are provided with a full tank. You may return the vehicle with a full tank or pay for the missing fuel at the set rate."
+     ]
+    },
+    {
+     "heading": "7. Cancellation and Booking Changes",
+     "lines": [
+      "Free Cancellation: You may cancel your booking free of charge no later than 48 hours before the scheduled pickup time.",
+      "Late Cancellation Fee: If cancellation occurs less than 48 hours before the rental begins, a 30% fee of the total rental cost applies.",
+      "No-Show: If the renter fails to show up without prior notice, a fee equal to one day’s rental will be charged.",
+      "Booking Changes: Changes to your booking (e.g., pickup time or vehicle type) are possible depending on availability. Costs may change accordingly."
+     ]
+    },
+    {
+     "heading": "8. Renter’s Responsibilities",
+     "lines": [
+      "Traffic Violations: The renter is fully responsible for all fines and violations incurred during the rental period.",
+      "Vehicle Condition: The vehicle must be returned in the same condition as received, except for normal wear and tear.",
+      "Damages and Losses: The renter is responsible for any damage or loss of the vehicle, as well as for any fines or fees incurred during the rental."
+     ]
+    }
+   ],
+   "outro": [
+    "For more information or assistance, please contact AvtoNik customer support."
+   ]
+  },
+  "ru": {
+   "title": "Условия использования",
+   "sections": [
+    {
+     "heading": "1. Требования к арендатору",
+     "lines": [
+      "Водительские права: Арендатор должен иметь действительные водительские права не менее 2 лет. Для граждан стран, не входящих в ЕС, рекомендуется наличие международного водительского удостоверения (IDP).",
+      "Возрастные ограничения: Минимальный возраст арендатора — 21 год.",
+      "Идентификация: При получении автомобиля необходимо предоставить действующий паспорт или национальное удостоверение личности."
+     ]
+    },
+    {
+     "heading": "2. Оплата и депозит",
+     "lines": [
+      "Способы оплаты: Принимаются основные кредитные и дебетовые карты, а также наличные. Платёж должен быть произведён на имя арендатора и действителен на весь период аренды.",
+      "Депозит: При получении автомобиля требуется внести депозит, сумма которого зависит от выбранного класса автомобиля. Депозит возвращается сразу после возврата автомобиля клиентом, при условии соблюдения всех условий."
+     ]
+    },
+    {
+     "heading": "3. Срок аренды",
+     "lines": [
+      "Продолжительность: Минимальный срок аренды — 1 день. Один арендный день составляет 24 часа с момента начала аренды.",
+      "Льготный период: Предусмотрен льготный период в 2 часа. В случае возврата автомобиля с опозданием более чем на 120 минут взимается дополнительная плата в размере суточной арендной ставки.",
+      "Штрафы за просрочку:",
+      "- До 2 часов: бесплатно (льготный период)",
+      "- От 2 до 6 часов: 50% суточной ставки",
+      "- Более 6 часов: полная суточная ставка за каждый дополнительный день",
+      "Повторные случаи просрочки могут повлечь за собой административные сборы."
+     ]
+    },
+    {
+     "heading": "4. Использование автомобиля",
+     "lines": [
+      "Разрешённые водители: Управлять автомобилем могут только лица, указанные в договоре аренды.",
+      "Запрещённое использование: Запрещается использовать автомобиль:",
+      "- По бездорожью, если повреждения или потеря связаны с дорожными условиями",
+      "- Для перевозки пассажиров или грузов с целью получения прибыли",
+      "- Для субаренды",
+      "- В состоянии алкогольного или наркотического опьянения"
+     ]
+    },
+    {
+     "heading": "5. Страхование и ответственность",
+     "lines": [
+      "Покрытие: Все тарифы включают страховку от повреждений (CDW) и угона (TP), уменьшающую ответственность арендатора до размера франшизы, указанной в договоре аренды. Страхование действительно только при соблюдении условий договора и официальной фиксации инцидента в полиции.",
+      "Дополнительное покрытие: Арендатор может приобрести опцию \"Полная защита\", которая снижает или полностью исключает финансовую ответственность в случае повреждения или угона при условии соблюдения условий аренды."
+     ]
+    },
+    {
+     "heading": "6. Дополнительные услуги",
+     "lines": [
+      "Доставка и возврат: В случае, если вы заказываете доставку или возврат автомобиля вне офиса компании, взимается дополнительная плата.",
+      "Обслуживание вне рабочего времени: Получение или возврат автомобиля вне стандартных рабочих часов требует предварительного согласования и оплачивается отдельно.",
+      "Политика топлива: Автомобили предоставляются с полным баком. Вы можете вернуть автомобиль с полным баком или оплатить стоимость недостающего топлива по установленному тарифу."
+     ]
+    },
+    {
+     "heading": "7. Отмена и изменения бронирования",
+     "lines": [
+      "Бесплатная отмена: Вы можете отменить бронирование бесплатно не позднее чем за 48 часов до запланированного времени получения автомобиля.",
+      "Плата за позднюю отмену: При отмене менее чем за 48 часов до начала аренды взимается штраф в размере 30% от общей стоимости аренды.",
+      "Отсутствие арендатора: В случае неявки без предварительного уведомления взимается сумма в размере стоимости одного дня аренды.",
+      "Изменения бронирования: Внесение изменений в бронирование (например, времени получения или типа автомобиля) возможно при наличии соответствующих опций. Возможны изменения в стоимости."
+     ]
+    },
+    {
+     "heading": "8. Обязанности арендатора",
+     "lines": [
+      "Нарушения ПДД: Арендатор несёт полную ответственность за все штрафы и нарушения, совершённые в период аренды.",
+      "Состояние автомобиля: Автомобиль должен быть возвращён в том же состоянии, в котором он был получен, за исключением обычного износа.",
+      "Повреждения и потери: Арендатор несёт ответственность за повреждения или потерю автомобиля, а также за любые штрафы и сборы, начисленные в период аренды."
+     ]
+    }
+   ],
+   "outro": [
+    "Для получения дополнительной информации или консультации обратитесь в службу поддержки AvtoNik."
+   ]
+  }
+ }
+}
