@@ -136,7 +136,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
       {/* ── Популярные автомобили (по одному каждого класса) ── */}
       <section id="cars" aria-labelledby="cars-title" className="mx-auto max-w-6xl scroll-mt-20 px-4 pt-20">
-        <SectionHead id="cars-title" title={d.home.popularTitle} text={d.home.popularText} href={to("/cars")} more={d.home.allCars} />
+        <SectionHead id="cars-title" title={d.home.popularTitle} text={d.home.popularText} />
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {popular.map((c) => <li key={c.id}><CarCard car={carCard(c, s.city, s.currency, lang, categoryName(carCats, c.category, lang))} lang={lang} /></li>)}
         </ul>
@@ -145,7 +145,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
       {/* ── Куда поехать ── */}
       <section id="sights" aria-labelledby="sights-title" className="mx-auto max-w-6xl scroll-mt-20 px-4 pt-24">
-        <SectionHead id="sights-title" title={d.home.sightsTitle(s.city)} text={d.home.sightsText} href={to("/sights")} more={d.home.allSights} />
+        <SectionHead id="sights-title" title={d.home.sightsTitle(s.city)} text={d.home.sightsText} />
         <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {places.map((x) => (
             <li key={x.id}>
@@ -256,14 +256,12 @@ const HOW_ICONS = [
   icon(<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z" />),
 ];
 
-function SectionHead({ id, title, text, href, more }: { id: string; title: string; text: string; href: string; more: string }) {
+/** Заголовок блока; «показать все» — кнопкой под карточками (MoreLink). */
+function SectionHead({ id, title, text }: { id: string; title: string; text: string }) {
   return (
-    <div className="flex flex-wrap items-end justify-between gap-4">
-      <div>
-        <h2 id={id} className="text-3xl font-extrabold md:text-4xl">{title}</h2>
-        <p className="mt-2 max-w-2xl text-slate-600">{text}</p>
-      </div>
-      <Link href={href} className="hidden font-bold text-brand hover:text-brand-dark sm:inline">{more} →</Link>
+    <div>
+      <h2 id={id} className="text-3xl font-extrabold md:text-4xl">{title}</h2>
+      <p className="mt-2 max-w-2xl text-slate-600">{text}</p>
     </div>
   );
 }
