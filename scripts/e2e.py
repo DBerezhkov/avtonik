@@ -283,8 +283,10 @@ kut = next(i for i, p in enumerate(pts) if "Кутаиси" in p["name"])
 changed = [dict(p, price=("21" if i == kut else p["price"])) for i, p in enumerate(pts)]
 st, loc, _ = req("/admin/delivery", dform + [("points", json.dumps(changed))])
 check("saved=1" in (loc or ""), f"пункты подачи сохранены ({st} {loc})")
+req("/ru/cars/ford-escape-2016"), req("/cars/ford-escape-2016")  # первый запрос после сброса кеша ещё отдаёт старую страницу и запускает пересборку
 ru_car, en_car = req("/ru/cars/ford-escape-2016")[2], req("/cars/ford-escape-2016")[2]
-check("$21" in ru_car and "$21" in en_car, "новая доплата сразу на странице машины, одна для RU и EN")
+check(all(re.search(r'\\?"price\\?":21[,}]', pg) for pg in (ru_car, en_car)) and "Car delivery" not in en_car and "Подача автомобиля" not in ru_car,
+      "новая доплата в выпадашке подачи на странице машины, одна для RU и EN; отдельного блока «Подача» нет")
 req("/admin/delivery", dform + [("points", json.dumps(pts))])
 
 # 3. Создание машины с фото

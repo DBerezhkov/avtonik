@@ -136,7 +136,6 @@ const ru = {
     book: "Написать в WhatsApp",
     bookTelegram: "Написать в Telegram",
     call: "Позвонить",
-    delivery: "Подача автомобиля",
     whatsapp: (name: string, url: string) => `Здравствуйте! Хочу арендовать ${name}. ${url}`,
     labels: {
       year: "Год выпуска", category: "Класс", transmission: "Коробка передач",
@@ -276,7 +275,6 @@ const en: Dict = {
     book: "Message on WhatsApp",
     bookTelegram: "Message on Telegram",
     call: "Call",
-    delivery: "Car delivery",
     whatsapp: (name, url) => `Hello! I'd like to rent the ${name}. ${url}`,
     labels: {
       year: "Year", category: "Class", transmission: "Transmission",

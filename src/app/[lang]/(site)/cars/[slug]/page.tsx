@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { categoryName, getCategories, getCarBySlug, getCars, getSettings, localizeCar, localizeSettings } from "@/lib/data";
 import {
   FUELS, TRANSMISSIONS, absoluteUrl, carName, formatPrice, imageUrl, label, minPrice, ogBase, priceTiers, snippet,
-  parsePickupPoints, pickupFee, pickupsFor, telegramUrl, whatsappUrl,
+  parsePickupPoints, pickupsFor, telegramUrl, whatsappUrl,
 } from "@/lib/format";
 import { LOCALES, isLang, languages, path, t, valueIn, type Lang } from "@/lib/i18n";
 import { BookingForm, BookingFormFromUrl } from "@/components/BookingForm";
@@ -252,19 +252,6 @@ async function CarDetails({ params }: Pick<PageProps<"/[lang]/cars/[slug]">, "pa
           <a href={`tel:${s.phone.replace(/[^\d+]/g, "")}`} className="mt-3 block rounded-full bg-brand px-6 py-3 text-center font-bold text-white hover:bg-brand-dark">
             {d.car.call} {s.phone}
           </a>
-          {booking.pickups.length > 0 && (
-            <div className="mt-6 border-t border-slate-100 pt-4 text-sm">
-              <p className="font-bold">{d.car.delivery}</p>
-              <ul className="mt-2 space-y-1 text-slate-600">
-                {booking.pickups.map((p) => (
-                  <li key={p.place} className="flex justify-between gap-3">
-                    <span>{p.place}</span>
-                    <span className={`shrink-0 font-semibold ${p.price > 0 ? "text-fg" : "text-green-700"}`}>{pickupFee(p, s.currency, lang)}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </aside>
       </div>
     </article>
