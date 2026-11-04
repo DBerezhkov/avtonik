@@ -107,6 +107,7 @@ export type Review = {
 };
 
 export type BookingStatus = "new" | "confirmed" | "done" | "cancelled";
+export type ClientReview = "" | "good" | "bad";
 
 export type Booking = {
   id: number;
@@ -121,6 +122,8 @@ export type Booking = {
   pickup_price: number;
   lang: string;
   status: BookingStatus;
+  review: ClientReview;
+  review_note: string;
   created_at: string;
 };
 

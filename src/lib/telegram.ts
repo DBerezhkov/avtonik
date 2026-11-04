@@ -1,6 +1,7 @@
 import "server-only";
 import { revalidateTag } from "next/cache";
-import { NEXT, bookingTotal, canDelete, changeStatus, nights, readBooking, removeBooking, type Step } from "./bookings";
+import { ruPlural } from "./admin-i18n";
+import { NEXT, bookingTotal, changeStatus, clientHistory, nights, readBooking, type Step } from "./bookings";
 import { db } from "./db";
 import { readSettings, type Booking, type BookingStatus } from "./data";
 import { formatPrice, whatsappUrl } from "./format";
@@ -44,12 +45,25 @@ const LISTS: Record<BookingStatus, string> = { new: "🟠 Новые", confirmed
 const STEP: Record<Step, string> = { confirm: "✅ Подтвердить", cancel: "✖️ Отклонить", returned: "🔑 Вернули машину" };
 const ORDER: BookingStatus[] = ["new", "confirmed", "done", "cancelled"];
 
-/** Карточка заявки: текст как в админке и кнопки по статусу. */
+const REVIEW = { good: "👍 Хороший опыт", bad: "👎 Плохой опыт" };
+
+/** Другие заявки с этого номера: плохой опыт — предупреждением, иначе — сколько раз обращался и с какими отзывами. */
+function historyLines(b: Booking) {
+  const h = clientHistory(b);
+  if (!h) return [];
+  return [
+    h.bad > 0 && `⚠️ <b>ПЛОХОЙ ОПЫТ с этим номером (${h.bad})</b>${h.badNotes.length ? `\n${h.badNotes.slice(0, 3).map((n) => `   «${esc(n)}»`).join("\n")}` : ""}`,
+    `🔁 Уже обращался: ${h.count} ${ruPlural(h.count, "заявка", "заявки", "заявок")} · 👍 ${h.good} · 👎 ${h.bad}`,
+  ];
+}
+
+/** Карточка заявки: текст как в админке, история клиента по номеру и кнопки по статусу. */
 function card(b: Booking, header?: string): { text: string; reply_markup: Keyboard } {
   const { currency } = readSettings();
   const total = bookingTotal(b);
   const text = [
     header && `<b>${header}</b>`,
+    ...historyLines(b),
     `${STATUS[b.status]} · <b>#${b.id}</b>`,
     `<b>${esc(b.car_name)}</b>`,
     `📅 ${day(b.date_from)} → ${day(b.date_to)} (${nights(b.date_from, b.date_to)} сут.)`,
@@ -58,9 +72,9 @@ function card(b: Booking, header?: string): { text: string; reply_markup: Keyboa
     `👤 ${esc(b.name)}`,
     `📞 ${esc(b.phone)} · <a href="${esc(whatsappUrl(b.phone, `Здравствуйте, ${b.name}! Это по вашей заявке на ${b.car_name}.`))}">WhatsApp</a>`,
     b.comment && `💬 ${esc(b.comment)}`,
+    (b.review || b.review_note) && `📝 ${[b.review && REVIEW[b.review], b.review_note && esc(b.review_note)].filter(Boolean).join(" — ")}`,
   ].filter(Boolean).join("\n");
   const actions: Button[] = NEXT[b.status].map(([to, step]) => ({ text: STEP[step], callback_data: `s:${b.id}:${to}` }));
-  if (canDelete(b.status)) actions.push({ text: "🗑 Удалить", callback_data: `d:${b.id}` });
   return { text, reply_markup: { inline_keyboard: [...(actions.length ? [actions] : []), [{ text: "📋 Все брони", callback_data: "m" }]] } };
 }
 
@@ -131,20 +145,6 @@ export async function handleUpdate(u: Update) {
       revalidateTag("bookings", { expire: 0 }); // занятость машин на сайте — сразу
       toast = STATUS[arg as BookingStatus];
     } else toast = "Статус уже изменён";
-  } else if (kind === "d") {
-    const b = readBooking(id);
-    if (b && canDelete(b.status)) {
-      view = {
-        text: `${card(b).text}\n\n<b>Удалить заявку #${b.id}?</b>`,
-        reply_markup: { inline_keyboard: [[{ text: "🗑 Да, удалить", callback_data: `D:${id}` }, { text: "Отмена", callback_data: `b:${id}` }]] },
-      };
-    }
-  } else if (kind === "D") {
-    if (removeBooking(id)) {
-      revalidateTag("bookings", { expire: 0 });
-      toast = "Заявка удалена";
-      view = { text: `🗑 Заявка #${id} удалена.`, reply_markup: { inline_keyboard: [[{ text: "📋 Все брони", callback_data: "m" }]] } };
-    } else toast = "Удалить нельзя";
   }
   // Карточка (после смены статуса и по «b:») — свежая из базы; заявки уже нет — сообщаем
   if (!view && kind !== "m" && kind !== "l") {

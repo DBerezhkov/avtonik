@@ -1,10 +1,11 @@
 import Link from "next/link";
-import { deleteBooking, setBookingStatus } from "@/app/admin/actions";
-import { ConfirmButton, btnOutline } from "@/components/admin/ui";
+import { setBookingStatus } from "@/app/admin/actions";
+import { ReviewMenu } from "@/components/admin/ReviewMenu";
+import { btnOutline } from "@/components/admin/ui";
 import { adminT } from "@/lib/admin-i18n";
 import { getAdminLang } from "@/lib/admin-lang";
-import { NEXT, bookingTotal, canDelete, nights } from "@/lib/bookings";
-import { readBookings, readSettings, type BookingStatus } from "@/lib/data";
+import { NEXT, archived, bookingTotal, clientHistory, nights } from "@/lib/bookings";
+import { readBookings, readSettings, type Booking, type BookingStatus } from "@/lib/data";
 import { formatPrice, whatsappUrl } from "@/lib/format";
 import { LOCALE_TAG, type Lang } from "@/lib/i18n";
 
@@ -19,25 +20,28 @@ const STATUS: Record<BookingStatus, string> = {
 const fmt = (d: string, lang: Lang) => new Date(`${d}T00:00:00Z`).toLocaleDateString(LOCALE_TAG[lang], { day: "numeric", month: "short", timeZone: "UTC" });
 const created = (s: string, lang: Lang) => new Date(`${s.replace(" ", "T")}Z`).toLocaleString(LOCALE_TAG[lang], { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", timeZone: "Asia/Tbilisi" });
 
-/** Список броней с кнопками статусов — вкладка «Брони» админки и мини-апп Telegram (/admin/tg). q — поиск. */
+/** Список броней с кнопками статусов — вкладка «Брони» админки и мини-апп Telegram (/admin/tg). q — поиск.
+ *  Выполненные и отклонённые — в свёрнутом «Архиве» внизу (при поиске раскрыт); удалять брони нельзя. */
 export async function BookingsList({ q = "" }: { q?: string }) {
   const lang = await getAdminLang();
   const a = adminT(lang);
   const t = a.bookings;
   const all = readBookings();
   const { currency } = readSettings();
-  const total = (b: (typeof all)[number]) => {
+  const total = (b: Booking) => {
     const sum = bookingTotal(b);
     return sum != null ? formatPrice(sum, currency, lang) : null;
   };
-  const list = q ? all.filter((b) => `${b.name} ${b.phone} ${b.car_name} ${b.comment} ${b.pickup}`.toLowerCase().includes(q)) : all;
+  const list = q ? all.filter((b) => `${b.name} ${b.phone} ${b.car_name} ${b.comment} ${b.pickup} ${b.review_note}`.toLowerCase().includes(q)) : all;
+  const active = list.filter((b) => !archived(b.status));
+  const archive = list.filter((b) => archived(b.status));
 
-  return (
-    <>
-      <ul className="space-y-3">
-        {list.map((b) => (
-          <li key={b.id} className={`rounded-2xl bg-white px-5 py-4 shadow-sm ring-1 ring-sand-line ${b.status === "cancelled" || b.status === "done" ? "opacity-70" : ""}`}>
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+  const item = (b: Booking) => {
+    const h = clientHistory(b, all);
+    return (
+          <li key={b.id} className="rounded-2xl bg-white px-5 py-4 shadow-sm ring-1 ring-sand-line">
+            <div className="flex items-start gap-3">
+            <div className={`flex flex-1 flex-wrap items-center gap-x-8 gap-y-3 ${archived(b.status) ? "opacity-70" : ""}`}>
               <div className="w-56">
                 <p className="flex items-center gap-2">
                   <span className="truncate font-bold">{b.name}</span>
@@ -63,15 +67,36 @@ export async function BookingsList({ q = "" }: { q?: string }) {
                     <button className={status === "confirmed" || status === "done" ? "rounded-xl bg-ink px-4 py-2.5 text-sm font-bold text-white hover:bg-black" : btnOutline}>{t[label]}</button>
                   </form>
                 ))}
-                {canDelete(b.status) && (
-                  <ConfirmButton action={deleteBooking.bind(null, b.id)} message={t.confirmDelete(b.name)}>{a.delete}</ConfirmButton>
-                )}
               </div>
             </div>
+            <ReviewMenu id={b.id} review={b.review} note={b.review_note} />
+            </div>
+            {h && (
+              <p className="mt-2 text-sm font-semibold">
+                <span className="text-sand-ink">{t.history(h.count)}{h.good > 0 && ` · 👍 ${h.good}`}</span>
+                {h.bad > 0 && <span className="text-red-700"> · {t.historyBad(h.bad)}{h.badNotes[0] && ` — ${h.badNotes[0]}`}</span>}
+              </p>
+            )}
             {b.comment && <p className="mt-3 whitespace-pre-line rounded-lg bg-sand-field px-3 py-2 text-sm ring-1 ring-sand-line">{b.comment}</p>}
+            {(b.review || b.review_note) && (
+              <p className={`mt-3 whitespace-pre-line rounded-lg px-3 py-2 text-sm ring-1 ${b.review === "bad" ? "bg-red-50 text-red-800 ring-red-200" : b.review === "good" ? "bg-green-50 text-green-900 ring-green-200" : "bg-sand-field ring-sand-line"}`}>
+                {b.review && <b>{t.review[b.review]}</b>}{b.review && b.review_note && " — "}{b.review_note}
+              </p>
+            )}
           </li>
-        ))}
-      </ul>
+    );
+  };
+
+  return (
+    <>
+      <ul className="space-y-3">{active.map(item)}</ul>
+      {archive.length > 0 && (
+        <details open={!!q} className="mt-8 rounded-2xl bg-white/60 p-4 ring-1 ring-sand-line">
+          <summary className="cursor-pointer text-lg font-bold">{t.archive(archive.length)}</summary>
+          <p className="mb-3 mt-1 text-sm text-sand-ink">{t.archiveHint}</p>
+          <ul className="space-y-3">{archive.map(item)}</ul>
+        </details>
+      )}
       {list.length === 0 && (
         <p className="py-16 text-center text-sand-ink">
           {q ? a.notFound : t.empty}

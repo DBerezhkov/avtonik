@@ -7,7 +7,7 @@ export const ADMIN_LANG_COOKIE = "admin_lang";
 
 export const adminLang = (v: string | undefined | null): Lang => (v === "en" ? "en" : "ru");
 
-const ruPlural = (n: number, one: string, few: string, many: string) => {
+export const ruPlural = (n: number, one: string, few: string, many: string) => {
   const m10 = n % 10, m100 = n % 100;
   return m10 === 1 && m100 !== 11 ? one : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? few : many;
 };
@@ -134,7 +134,14 @@ const ru = {
     whatsapp: "Написать в WhatsApp ↗",
     nights: (n: number) => `${n} сут.`,
     created: (date: string, site: string) => `Заявка от ${date} · сайт ${site}`,
-    confirmDelete: (name: string) => `Удалить заявку ${name}?`,
+    archive: (n: number) => `Архив · ${n}`,
+    archiveHint: "Выполненные и отклонённые. Удалить нельзя — по ним видна история клиента.",
+    reviewMenu: "Отзыв о клиенте",
+    review: { good: "👍 Хороший опыт", bad: "👎 Плохой опыт", "": "Без оценки" },
+    reviewNote: "Комментарий: вернул ли машину вовремя, в каком виде…",
+    reviewSave: "Сохранить",
+    history: (n: number) => `🔁 С этого номера уже ${n} ${ruPlural(n, "заявка", "заявки", "заявок")}`,
+    historyBad: (n: number) => `⚠️ Плохой опыт: ${n}`,
     empty: "Заявок пока нет. Они появятся, когда клиенты отправят форму на странице машины.",
   },
   delivery: {
@@ -191,7 +198,6 @@ const ru = {
     wait: "Входим через Telegram…",
     notInTelegram: "Эта страница открывается из бота AvtoNik в Telegram (кнопка «Открыть»).",
     tabs: { new: "Новые", confirmed: "В работе", done: "Выполнены", cancelled: "Отклонены" },
-    sure: "Точно удалить?",
     empty: "Здесь пока пусто.",
   },
   errors: {
@@ -348,7 +354,14 @@ const en: AdminDict = {
     whatsapp: "Message on WhatsApp ↗",
     nights: (n) => `${n} ${enPlural(n, "day", "days")}`,
     created: (date, site) => `Request ${date} · site ${site}`,
-    confirmDelete: (name) => `Delete the booking from ${name}?`,
+    archive: (n) => `Archive · ${n}`,
+    archiveHint: "Completed and rejected. They can't be deleted — they keep the customer's history.",
+    reviewMenu: "Customer review",
+    review: { good: "👍 Good experience", bad: "👎 Bad experience", "": "No rating" },
+    reviewNote: "Comment: returned on time, condition of the car…",
+    reviewSave: "Save",
+    history: (n) => `🔁 ${n} earlier ${enPlural(n, "request", "requests")} from this number`,
+    historyBad: (n) => `⚠️ Bad experience: ${n}`,
     empty: "No bookings yet. They will appear when customers submit the form on a car page.",
   },
   delivery: {
@@ -404,7 +417,6 @@ const en: AdminDict = {
     wait: "Signing in with Telegram…",
     notInTelegram: "This page opens from the AvtoNik bot in Telegram (the “Open” button).",
     tabs: { new: "New", confirmed: "In progress", done: "Completed", cancelled: "Rejected" },
-    sure: "Really delete?",
     empty: "Nothing here yet.",
   },
   errors: {

@@ -112,6 +112,8 @@ CREATE TABLE IF NOT EXISTS bookings (
   comment    TEXT NOT NULL DEFAULT '',
   lang       TEXT NOT NULL DEFAULT 'en',     -- язык сайта, с которого пришла заявка
   status     TEXT NOT NULL DEFAULT 'new',    -- new | confirmed | done | cancelled
+  review     TEXT NOT NULL DEFAULT '',       -- отзыв админа о клиенте: '' | good | bad
+  review_note TEXT NOT NULL DEFAULT '',      -- комментарий админа (вернул ли машину, в каком виде…)
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 CREATE INDEX IF NOT EXISTS bookings_status ON bookings(status, created_at);

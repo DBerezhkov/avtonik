@@ -195,17 +195,15 @@ req("/cars/ford-escape-2016", bf + [("from", f1), ("to", f2), ("name", "E2E Ав
 req("/cars/ford-escape-2016", bf + [("from", f1), ("to", f2), ("name", "E2E Бот"), ("phone", "+995 555 11 22 33"), ("comment", ""), ("hp_x7", "spam")])
 bk = req("/admin/bookings")[2]
 check("E2E Автозаполнение" in bk and "E2E Бот" not in bk, "заявка с автозаполненным «website» доходит, бот с заполненной ловушкой — нет")
-# Удаления у живой заявки нет; «Отклонить» -> статус «Отклонена» и вместо кнопки — «Удалить».
-# Кнопки статуса Next досылает потоком ниже карточки, поэтому считаем по всей странице.
+# «Отклонить» -> «Отклонена», заявка уходит в свёрнутый «Архив» внизу; удалить бронь нельзя нигде.
 # Первая «Отклонить» — у самой свежей новой заявки, то есть у только что отправленной тестовой.
-dels = lambda page: page.count("Удалить</button>")
-del_before = dels(bk)
 req("/admin/bookings", form_fields(bk, ">Отклонить</button>"))
-bk = req("/admin/bookings")[2]
-check("Отклонена" in bk and dels(bk) == del_before + 1, f"отклонённая заявка: появилась кнопка «Удалить» ({del_before} -> {dels(bk)})")
-req("/admin/bookings", form_fields(bk, "Удалить</button>"))
-bk = req("/admin/bookings")[2]
-check("E2E Автозаполнение" not in bk and dels(bk) == del_before, "отклонённая заявка удалена")
+bk = req("/admin/bookings")[2].replace("<!-- -->", "")
+arch = bk.split(">Архив · ", 1)
+check(len(arch) == 2 and "E2E Автозаполнение" in arch[1] and "E2E Автозаполнение" not in arch[0] and "Отклонена" in arch[1],
+      "отклонённая заявка — в «Архиве» внизу списка")
+check(re.search(r"<details(?![^>]*\bopen)[^>]*>\s*<summary[^>]*>Архив", bk) is not None, "«Архив» свёрнут")
+check("Удалить</button>" not in bk, "у броней нет кнопки «Удалить»")
 # Подтверждённая бронь (E2E Клиент, d1 -> d2) занимает машину: пересечение отклоняется, стык — нет
 mid = (datetime.date.fromisoformat(d1) + datetime.timedelta(days=1)).isoformat()
 d3 = (datetime.date.fromisoformat(d2) + datetime.timedelta(days=3)).isoformat()
@@ -222,8 +220,13 @@ bk = req(client_q)[2]
 check(">Вернули машину</button>" in bk and ">Отклонить</button>" not in bk, "у брони в работе одна кнопка — «Вернули машину»")
 req(client_q, form_fields(bk, ">Вернули машину</button>"))
 bk = req(client_q)[2]
-check("Выполнена" in bk and "Удалить</button>" in bk and not any(b in bk for b in (">Вернули машину</button>", ">Подтвердить</button>", ">Отклонить</button>")),
-      "выполненная бронь — сумма и только кнопка «Удалить»")
+check("Выполнена" in bk and "Удалить</button>" not in bk and not any(b in bk for b in (">Вернули машину</button>", ">Подтвердить</button>", ">Отклонить</button>")),
+      "выполненная бронь — без кнопок, удалить нельзя")
+# Отзыв админа через «⋯»: плохой опыт с комментарием — виден на карточке
+bk = req(client_q)[2]
+req(client_q, form_fields(bk, 'name="review_note"') + [("review", "bad"), ("review_note", "E2E вернул грязную машину")])
+bk = req(client_q)[2].replace("<!-- -->", "")
+check("👎 Плохой опыт</b> — E2E вернул грязную машину" in bk, "отзыв админа о клиенте сохранён и виден на карточке")
 check({"from": d1, "to": d2} not in json.loads(req("/api/busy?car=1")[2]), "после возврата машины даты брони освободились")
 
 # Брони в Telegram-боте: вебхук /api/telegram (секрет, доступ только TELEGRAM_CHAT_ID), меню, кнопки статусов, удаление
@@ -264,10 +267,23 @@ check(tg_last("answerCallbackQuery").get("text") == "Статус уже изм�
 tg_press(f"s:{bot_id}:done")
 check("Выполнена" in tg_last("editMessageText").get("text", "") and {"from": b1, "to": b2} not in json.loads(req("/api/busy?car=1")[2]),
       "«Вернули машину» в боте: выполнена, даты освободились")
-tg_press(f"d:{bot_id}")
-check(f'"D:{bot_id}"' in json.dumps(tg_last("editMessageText").get("reply_markup")), "удаление в боте — с подтверждением")
-tg_press(f"D:{bot_id}")
-check("E2E Бот" not in req("/admin/bookings")[2] and "удалена" in tg_last("editMessageText").get("text", ""), "заявка удалена из бота")
+check(not re.search(r'"[dD]:', json.dumps(tg_last("editMessageText").get("reply_markup"))), "в боте нет кнопки удаления у выполненной")
+tg_press(f"D:{bot_id}")  # старая кнопка «Да, удалить» из прежних сообщений ничего не удаляет
+check("E2E Бот" in req("/admin/bookings?q=" + urllib.parse.quote("E2E Бот"))[2], "старая кнопка удаления в боте заявку не удаляет")
+# Новая заявка с номера, по которому плохой отзыв (другая запись того же номера) — бот сразу предупреждает
+r1 = (datetime.date.fromisoformat(b2) + datetime.timedelta(days=10)).isoformat()
+r2 = (datetime.date.fromisoformat(b2) + datetime.timedelta(days=12)).isoformat()
+sent_before = len(tg_sent)
+req("/cars/ford-escape-2016", bf + [("from", r1), ("to", r2), ("name", "E2E Повтор"), ("phone", "8 555 112233"), ("comment", ""), ("hp_x7", "")])
+for _ in range(20):
+    if len(tg_sent) > sent_before:
+        break
+    time.sleep(0.25)
+rep_txt = tg_sent[-1][1].get("text", "") if len(tg_sent) > sent_before else ""
+check("ПЛОХОЙ ОПЫТ с этим номером" in rep_txt and "«E2E вернул грязную машину»" in rep_txt and re.search(r"🔁 Уже обращался: \d+ заяв", rep_txt) is not None,
+      f"бот предупреждает о клиенте с плохим отзывом и пишет, сколько было заявок: {rep_txt[:300]!r}")
+bk = req("/admin/bookings?q=" + urllib.parse.quote("E2E Повтор"))[2].replace("<!-- -->", "")
+check("⚠️ Плохой опыт:" in bk and "E2E вернул грязную машину" in bk, "в админке у повторной заявки — строка истории клиента")
 check(not re.search(r"Booked [A-Z][a-z]{2} ", req("/cars")[2]), "в каталоге без дат плашки «Booked …» с датами нет (занятость — в календаре машины)")
 check(not re.search(r"Занята \d", req("/ru/cars")[2] + req("/ru")[2]), "плашки «Занята 12–16 …» нет ни в русском каталоге, ни на главной")
 ru_cars = req("/ru/cars")[2].replace("<!-- -->", "")

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { deleteBooking, setBookingStatus } from "@/app/admin/actions";
-import { DeleteButton } from "./DeleteButton";
+import { setBookingStatus } from "@/app/admin/actions";
+import { ReviewMenu } from "@/components/admin/ReviewMenu";
 import { adminT } from "@/lib/admin-i18n";
-import { NEXT, bookingTotal, canDelete, nights } from "@/lib/bookings";
+import { NEXT, bookingTotal, clientHistory, nights } from "@/lib/bookings";
 import { db } from "@/lib/db";
 import { readSettings, type Booking, type BookingStatus } from "@/lib/data";
 import { formatPrice, whatsappUrl } from "@/lib/format";
@@ -22,6 +22,7 @@ export function MiniBookings({ lang, status }: { lang: Lang; status?: string }) 
   // По умолчанию — «Новые», если они есть, иначе «В работе»
   const active: BookingStatus = ORDER.includes(status as BookingStatus) ? (status as BookingStatus) : counts.new ? "new" : "confirmed";
   const list = db.prepare("SELECT * FROM bookings WHERE status = ? ORDER BY date_from, id").all(active) as Booking[];
+  const all = db.prepare("SELECT id, phone, review, review_note FROM bookings").all() as Booking[]; // история клиентов — одним запросом
 
   return (
     <div className="min-h-screen bg-sand pb-8 text-ink">
@@ -41,6 +42,7 @@ export function MiniBookings({ lang, status }: { lang: Lang; status?: string }) 
       <ul className="space-y-2 px-3 pt-3">
         {list.map((x) => {
           const total = bookingTotal(x);
+          const h = clientHistory(x, all);
           return (
             <li key={x.id} className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-sand-line">
               <div className="flex items-start justify-between gap-3">
@@ -51,12 +53,26 @@ export function MiniBookings({ lang, status }: { lang: Lang; status?: string }) 
                   </p>
                   <p className="mt-0.5 text-sm font-semibold">{day(x.date_from, lang)} → {day(x.date_to, lang)} <span className="text-sand-ink">· {b.nights(nights(x.date_from, x.date_to))}</span></p>
                 </div>
-                {total != null && <p className="shrink-0 text-lg font-extrabold text-brand">{formatPrice(total, currency, lang)}</p>}
+                <div className="flex shrink-0 items-start gap-1">
+                  {total != null && <p className="text-lg font-extrabold text-brand">{formatPrice(total, currency, lang)}</p>}
+                  <ReviewMenu id={x.id} review={x.review} note={x.review_note} />
+                </div>
               </div>
               <div className="mt-2 space-y-0.5 text-sm">
                 <p><span className="font-bold">{x.name}</span> <span className="text-sand-ink">· #{x.id}</span></p>
                 {x.pickup && <p className="text-sand-ink">📍 {x.pickup}</p>}
+                {h && (
+                  <p className="font-semibold">
+                    <span className="text-sand-ink">{b.history(h.count)}{h.good > 0 && ` · 👍 ${h.good}`}</span>
+                    {h.bad > 0 && <span className="text-red-700"> · {b.historyBad(h.bad)}{h.badNotes[0] && ` — ${h.badNotes[0]}`}</span>}
+                  </p>
+                )}
                 {x.comment && <p className="whitespace-pre-line rounded-lg bg-sand-field px-2.5 py-1.5 ring-1 ring-sand-line">{x.comment}</p>}
+                {(x.review || x.review_note) && (
+                  <p className={`whitespace-pre-line rounded-lg px-2.5 py-1.5 ring-1 ${x.review === "bad" ? "bg-red-50 text-red-800 ring-red-200" : x.review === "good" ? "bg-green-50 text-green-900 ring-green-200" : "bg-sand-field ring-sand-line"}`}>
+                    {x.review && <b>{b.review[x.review]}</b>}{x.review && x.review_note && " — "}{x.review_note}
+                  </p>
+                )}
               </div>
               <div className="mt-3 grid grid-cols-2 gap-2">
                 <a href={`tel:${x.phone.replace(/[^\d+]/g, "")}`} className="flex h-10 items-center justify-center rounded-xl border border-sand-line bg-sand-field text-sm font-bold">
@@ -65,14 +81,13 @@ export function MiniBookings({ lang, status }: { lang: Lang; status?: string }) 
                 <a href={whatsappUrl(x.phone, `Здравствуйте, ${x.name}! Это AvtoNik, по вашей заявке на ${x.car_name}.`)} target="_blank" rel="noopener noreferrer"
                   className="flex h-10 items-center justify-center rounded-xl bg-[#25D366] text-sm font-bold text-white">WhatsApp</a>
               </div>
-              {(NEXT[x.status].length > 0 || canDelete(x.status)) && (
+              {NEXT[x.status].length > 0 && (
                 <div className="mt-2 flex gap-2">
                   {NEXT[x.status].map(([to, step]) => (
                     <form key={to} action={setBookingStatus.bind(null, x.id, to)} className="flex-1">
                       <button className={`h-11 w-full rounded-xl text-sm font-bold ${step === "cancel" ? "border border-sand-line bg-white text-ink" : "bg-ink text-white"}`}>{b[step]}</button>
                     </form>
                   ))}
-                  {canDelete(x.status) && <DeleteButton action={deleteBooking.bind(null, x.id)} label={t.delete} sure={t.tg.sure} />}
                 </div>
               )}
             </li>

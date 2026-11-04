@@ -27,6 +27,7 @@ const ADDED_COLUMNS: [table: string, column: string, def?: string][] = [
   ["sights", "category"],
   ["sights", "car_type", "TEXT NOT NULL DEFAULT 'any'"], ["sights", "distance_km", "INTEGER"], ["sights", "drive_min", "INTEGER"],
   ["bookings", "pickup"], ["bookings", "pickup_price", "REAL NOT NULL DEFAULT 0"], // место подачи из заявки и доплата за него
+  ["bookings", "review", "TEXT NOT NULL DEFAULT ''"], ["bookings", "review_note", "TEXT NOT NULL DEFAULT ''"], // отзыв админа о клиенте
 ];
 
 // Классы машин на первый запуск (ключи — как на прежнем сайте, на них ссылки ?type=…); дальше — в админке, вкладка «Фильтры»

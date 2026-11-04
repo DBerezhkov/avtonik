@@ -7,8 +7,8 @@ import { redirect } from "next/navigation";
 import { ADMIN_LANG_COOKIE, adminLang, adminT } from "@/lib/admin-i18n";
 import { getAdminLang } from "@/lib/admin-lang";
 import { assignSightSlugs, db } from "@/lib/db";
-import { readCar, readSettings, readSight, type BookingStatus } from "@/lib/data";
-import { changeStatus, removeBooking } from "@/lib/bookings";
+import { readCar, readSettings, readSight, type BookingStatus, type ClientReview } from "@/lib/data";
+import { changeStatus, setReview } from "@/lib/bookings";
 import { FUELS, SIGHT_CARS, TRANSMISSIONS, slugify } from "@/lib/format";
 import { coordsFromMapsUrl, roadFromBatumi } from "@/lib/distance";
 import { filesFrom, removeImage, saveImage } from "@/lib/images";
@@ -501,7 +501,7 @@ export async function syncReviews(): Promise<FormState & { ok?: string }> {
 
 // ── Брони (заявки с сайта) ──
 
-// Переходы и удаление — общие с Telegram-ботом (src/lib/bookings.ts)
+// Переходы статусов — общие с Telegram-ботом (src/lib/bookings.ts)
 export async function setBookingStatus(id: number, status: BookingStatus) {
   await requireAdmin("bookings");
   if (!changeStatus(id, status)) return;
@@ -509,9 +509,9 @@ export async function setBookingStatus(id: number, status: BookingStatus) {
   refresh(); // список и счётчик в шапке — заново
 }
 
-export async function deleteBooking(id: number) {
+// Отзыв админа о клиенте (меню «⋯» у брони); на сайт не влияет — кеш не сбрасываем
+export async function saveBookingReview(id: number, formData: FormData) {
   await requireAdmin("bookings");
-  if (!removeBooking(id)) return;
-  updateTag("bookings");
+  if (!setReview(id, String(formData.get("review") ?? "") as ClientReview, String(formData.get("review_note") ?? ""))) return;
   refresh();
 }
