@@ -2,7 +2,7 @@ import Link from "next/link";
 import { setBookingStatus } from "@/app/admin/actions";
 import { ReviewMenu } from "@/components/admin/ReviewMenu";
 import { adminT } from "@/lib/admin-i18n";
-import { NEXT, bookingTotal, clientHistory, nights } from "@/lib/bookings";
+import { NEXT, archived, bookingTotal, clientHistory, nights } from "@/lib/bookings";
 import { db } from "@/lib/db";
 import { readSettings, type Booking, type BookingStatus } from "@/lib/data";
 import { formatPrice, whatsappUrl } from "@/lib/format";
@@ -43,8 +43,15 @@ export function MiniBookings({ lang, status }: { lang: Lang; status?: string }) 
         {list.map((x) => {
           const total = bookingTotal(x);
           const h = clientHistory(x, all);
+          const warn = h && h.bad > 0 && !archived(x.status); // активная заявка от клиента с плохим опытом
           return (
-            <li key={x.id} className="rounded-2xl bg-white p-4 shadow-sm ring-1 ring-sand-line">
+            <li key={x.id} className={`rounded-2xl bg-white p-4 shadow-sm ${warn ? "ring-2 ring-red-500" : "ring-1 ring-sand-line"}`}>
+              {warn && (
+                <div role="alert" className="mb-3 rounded-lg bg-red-600 px-3 py-2 text-sm font-bold text-white">
+                  {b.badWarning(h.bad)}
+                  {h.badNotes.slice(0, 3).map((n, i) => <p key={i} className="font-semibold">«{n}»</p>)}
+                </div>
+              )}
               <div className="flex items-start justify-between gap-3">
                 <div className="min-w-0">
                   <p className="flex items-center gap-2 font-extrabold">
@@ -64,7 +71,7 @@ export function MiniBookings({ lang, status }: { lang: Lang; status?: string }) 
                 {h && (
                   <p className="font-semibold">
                     <span className="text-sand-ink">{b.history(h.count)}{h.good > 0 && ` · 👍 ${h.good}`}</span>
-                    {h.bad > 0 && <span className="text-red-700"> · {b.historyBad(h.bad)}{h.badNotes[0] && ` — ${h.badNotes[0]}`}</span>}
+                    {h.bad > 0 && !warn && <span className="text-red-700"> · {b.historyBad(h.bad)}{h.badNotes[0] && ` — ${h.badNotes[0]}`}</span>}
                   </p>
                 )}
                 {x.comment && <p className="whitespace-pre-line rounded-lg bg-sand-field px-2.5 py-1.5 ring-1 ring-sand-line">{x.comment}</p>}

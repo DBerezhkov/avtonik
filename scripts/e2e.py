@@ -283,7 +283,8 @@ rep_txt = tg_sent[-1][1].get("text", "") if len(tg_sent) > sent_before else ""
 check("ПЛОХОЙ ОПЫТ с этим номером" in rep_txt and "«E2E вернул грязную машину»" in rep_txt and re.search(r"🔁 Уже обращался: \d+ заяв", rep_txt) is not None,
       f"бот предупреждает о клиенте с плохим отзывом и пишет, сколько было заявок: {rep_txt[:300]!r}")
 bk = req("/admin/bookings?q=" + urllib.parse.quote("E2E Повтор"))[2].replace("<!-- -->", "")
-check("⚠️ Плохой опыт:" in bk and "E2E вернул грязную машину" in bk, "в админке у повторной заявки — строка истории клиента")
+check("ring-red-500" in bk and "⚠️ У клиента есть плохие отзывы (1)" in bk and "«E2E вернул грязную машину»" in bk,
+      "в админке новая заявка клиента с плохим отзывом — красная рамка и плашка")
 check(not re.search(r"Booked [A-Z][a-z]{2} ", req("/cars")[2]), "в каталоге без дат плашки «Booked …» с датами нет (занятость — в календаре машины)")
 check(not re.search(r"Занята \d", req("/ru/cars")[2] + req("/ru")[2]), "плашки «Занята 12–16 …» нет ни в русском каталоге, ни на главной")
 ru_cars = req("/ru/cars")[2].replace("<!-- -->", "")

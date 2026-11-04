@@ -142,6 +142,7 @@ const ru = {
     reviewSave: "Сохранить",
     history: (n: number) => `🔁 С этого номера уже ${n} ${ruPlural(n, "заявка", "заявки", "заявок")}`,
     historyBad: (n: number) => `⚠️ Плохой опыт: ${n}`,
+    badWarning: (n: number) => `⚠️ У клиента есть плохие отзывы (${n})`,
     empty: "Заявок пока нет. Они появятся, когда клиенты отправят форму на странице машины.",
   },
   delivery: {
@@ -362,6 +363,7 @@ const en: AdminDict = {
     reviewSave: "Save",
     history: (n) => `🔁 ${n} earlier ${enPlural(n, "request", "requests")} from this number`,
     historyBad: (n) => `⚠️ Bad experience: ${n}`,
+    badWarning: (n) => `⚠️ This customer has bad reviews (${n})`,
     empty: "No bookings yet. They will appear when customers submit the form on a car page.",
   },
   delivery: {

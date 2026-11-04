@@ -38,8 +38,15 @@ export async function BookingsList({ q = "" }: { q?: string }) {
 
   const item = (b: Booking) => {
     const h = clientHistory(b, all);
+    const warn = h && h.bad > 0 && !archived(b.status); // активная заявка от клиента с плохим опытом — красная рамка и плашка
     return (
-          <li key={b.id} className="rounded-2xl bg-white px-5 py-4 shadow-sm ring-1 ring-sand-line">
+          <li key={b.id} className={`rounded-2xl bg-white px-5 py-4 shadow-sm ${warn ? "ring-2 ring-red-500" : "ring-1 ring-sand-line"}`}>
+            {warn && (
+              <div role="alert" className="mb-3 rounded-lg bg-red-600 px-3 py-2 text-sm font-bold text-white">
+                {t.badWarning(h.bad)}
+                {h.badNotes.slice(0, 3).map((n, i) => <p key={i} className="font-semibold">«{n}»</p>)}
+              </div>
+            )}
             <div className="flex items-start gap-3">
             <div className={`flex flex-1 flex-wrap items-center gap-x-8 gap-y-3 ${archived(b.status) ? "opacity-70" : ""}`}>
               <div className="w-56">
@@ -74,7 +81,7 @@ export async function BookingsList({ q = "" }: { q?: string }) {
             {h && (
               <p className="mt-2 text-sm font-semibold">
                 <span className="text-sand-ink">{t.history(h.count)}{h.good > 0 && ` · 👍 ${h.good}`}</span>
-                {h.bad > 0 && <span className="text-red-700"> · {t.historyBad(h.bad)}{h.badNotes[0] && ` — ${h.badNotes[0]}`}</span>}
+                {h.bad > 0 && !warn && <span className="text-red-700"> · {t.historyBad(h.bad)}{h.badNotes[0] && ` — ${h.badNotes[0]}`}</span>}
               </p>
             )}
             {b.comment && <p className="mt-3 whitespace-pre-line rounded-lg bg-sand-field px-3 py-2 text-sm ring-1 ring-sand-line">{b.comment}</p>}
