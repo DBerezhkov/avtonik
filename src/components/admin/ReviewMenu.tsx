@@ -5,7 +5,7 @@ import { saveBookingReview } from "@/app/admin/actions";
 import type { ClientReview } from "@/lib/data";
 import { useAdminT } from "./AdminLang";
 
-/** «⋯» справа на карточке брони: отзыв админа о клиенте — оценка и комментарий. Закрывается после сохранения, по Esc и клику мимо. */
+/** «⋮» справа на карточке брони: отзыв админа о клиенте — оценка и комментарий. Закрывается после сохранения, по Esc и клику мимо. */
 export function ReviewMenu({ id, review, note }: { id: number; review: ClientReview; note: string }) {
   const t = useAdminT().bookings;
   const ref = useRef<HTMLDetailsElement>(null);
@@ -26,7 +26,7 @@ export function ReviewMenu({ id, review, note }: { id: number; review: ClientRev
     <details ref={ref} className="relative">
       <summary aria-label={t.reviewMenu} title={t.reviewMenu}
         className="flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-lg text-xl font-bold leading-none text-sand-ink hover:bg-sand-field hover:text-ink [&::-webkit-details-marker]:hidden">
-        ⋯
+        ⋮
       </summary>
       <form action={saveBookingReview.bind(null, id)} onSubmit={() => { if (ref.current) ref.current.open = false; }}
         className="absolute right-0 z-20 mt-1 w-80 max-w-[calc(100vw-2rem)] space-y-3 rounded-2xl bg-white p-4 text-sm shadow-lg ring-1 ring-sand-line">
